@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.E.L.F. — Depth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-void: #080808;
+            --color-deep: #0c0c0c;
+            --color-presence: #f5f3ef;
+            --color-line: #c9a962;
+            --color-subtle: #8a8780;
+            --color-section: rgba(201, 169, 98, 0.05);
+            --color-pressure: rgba(201, 169, 98, 0.08);
+            --color-trap: rgba(180, 60, 60, 0.08);
+            --color-trap-border: rgba(180, 60, 60, 0.3);
+            --color-silence: rgba(201, 169, 98, 0.12);
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Spectral', Georgia, serif;
+            --spacing-unit: 1rem;
+            --max-width: 740px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--color-void);
+            color: var(--color-presence);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 10% 15%, rgba(201, 169, 98, 0.03) 0%, transparent 40%),
+                radial-gradient(ellipse at 90% 85%, rgba(201, 169, 98, 0.02) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 4) 0;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .symbol-header {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--color-line);
+            letter-spacing: 0.5em;
+            margin-bottom: calc(var(--spacing-unit) * 1.2);
+            text-shadow: 0 0 40px rgba(201, 169, 98, 0.3);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.6rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            margin-bottom: calc(var(--spacing-unit) * 0.4);
+            color: var(--color-presence);
+        }
+
+        .subtitle {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--color-subtle);
+            letter-spacing: 0.1em;
+        }
+
+        .document-marker {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--color-line);
+            letter-spacing: 0.15em;
+            margin-top: calc(var(--spacing-unit) * 1.2);
+            opacity: 0.7;
+        }
+
+        /* Main Sections */
+        .main-section {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .section-header {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            color: var(--color-line);
+            text-transform: uppercase;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            padding-bottom: calc(var(--spacing-unit) * 0.5);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.3);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: var(--color-presence);
+            margin-bottom: calc(var(--spacing-unit) * 1);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--color-line);
+            margin-top: calc(var(--spacing-unit) * 1.5);
+            margin-bottom: calc(var(--spacing-unit) * 0.6);
+        }
+
+        h4 {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--color-presence);
+            margin-top: calc(var(--spacing-unit) * 1.2);
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        p {
+            margin-bottom: calc(var(--spacing-unit) * 0.9);
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        /* Intro statement */
+        .intro-statement {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--color-subtle);
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            padding: calc(var(--spacing-unit) * 1.5);
+            border-top: 1px solid rgba(201, 169, 98, 0.15);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.15);
+        }
+
+        /* Pressure Block */
+        .pressure-block {
+            background: var(--color-pressure);
+            border-left: 3px solid var(--color-line);
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 1.8);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+        }
+
+        .pressure-challenge {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-subtle);
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+        }
+
+        .pressure-response {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            color: var(--color-line);
+            padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.2);
+            border-left: 2px solid var(--color-line);
+            margin: calc(var(--spacing-unit) * 1) 0;
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        .pressure-allowance {
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+            margin-top: calc(var(--spacing-unit) * 0.8);
+        }
+
+        .pressure-resolution {
+            margin-top: calc(var(--spacing-unit) * 1);
+            padding-top: calc(var(--spacing-unit) * 0.8);
+            border-top: 1px solid rgba(201, 169, 98, 0.15);
+        }
+
+        /* Failure Section */
+        .failure-list {
+            list-style: none;
+            padding-left: calc(var(--spacing-unit) * 1);
+            margin: calc(var(--spacing-unit) * 1) 0;
+        }
+
+        .failure-list li {
+            position: relative;
+            padding-left: calc(var(--spacing-unit) * 1.5);
+            margin-bottom: calc(var(--spacing-unit) * 0.4);
+            color: var(--color-subtle);
+        }
+
+        .failure-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--color-line);
+            opacity: 0.5;
+        }
+
+        .no-mechanism {
+            background: var(--color-section);
+            padding: calc(var(--spacing-unit) * 1.5);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            text-align: center;
+        }
+
+        .no-mechanism p {
+            margin-bottom: calc(var(--spacing-unit) * 0.4);
+            text-align: center;
+            color: var(--color-subtle);
+        }
+
+        .return-statement {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--color-presence);
+            text-align: center;
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            padding: calc(var(--spacing-unit) * 1);
+            border-left: 2px solid var(--color-line);
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        /* Trap Block */
+        .trap-block {
+            background: var(--color-trap);
+            border: 1px solid var(--color-trap-border);
+            border-left: 3px solid var(--color-trap-border);
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 1.8);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            position: relative;
+        }
+
+        .trap-block::before {
+            content: attr(data-trap);
+            position: absolute;
+            top: -10px;
+            left: 16px;
+            background: var(--color-void);
+            padding: 0 8px;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: rgba(180, 60, 60, 0.7);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .trap-voice {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-subtle);
+            margin-bottom: calc(var(--spacing-unit) * 0.6);
+        }
+
+        .trap-negation {
+            font-weight: 500;
+            color: var(--color-presence);
+            margin: calc(var(--spacing-unit) * 0.8) 0;
+        }
+
+        .trap-explanation {
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+        }
+
+        .trap-corrective {
+            margin-top: calc(var(--spacing-unit) * 1);
+            padding-top: calc(var(--spacing-unit) * 0.8);
+            border-top: 1px solid rgba(180, 60, 60, 0.2);
+        }
+
+        .trap-corrective-statement {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-line);
+        }
+
+        /* Silence Section */
+        .silence-section {
+            background: var(--color-silence);
+            border-top: 1px solid rgba(201, 169, 98, 0.25);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.25);
+            padding: calc(var(--spacing-unit) * 2.5);
+            margin: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        .silence-definition {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-style: italic;
+            text-align: center;
+            color: var(--color-presence);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .silence-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .silence-column h4 {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--color-line);
+            letter-spacing: 0.1em;
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+        }
+
+        .silence-column ul {
+            list-style: none;
+        }
+
+        .silence-column li {
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+            margin-bottom: calc(var(--spacing-unit) * 0.4);
+            padding-left: calc(var(--spacing-unit) * 1);
+            position: relative;
+        }
+
+        .silence-column li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--color-line);
+            opacity: 0.5;
+        }
+
+        .silence-note {
+            text-align: center;
+            margin-top: calc(var(--spacing-unit) * 1.5);
+            font-style: italic;
+            color: var(--color-subtle);
+        }
+
+        /* Final Compression */
+        .final-compression {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.03) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.25);
+            padding: calc(var(--spacing-unit) * 2.5);
+            margin: calc(var(--spacing-unit) * 3) 0;
+            text-align: center;
+        }
+
+        .final-statement {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--color-presence);
+            line-height: 2;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .final-note {
+            font-size: 0.9rem;
+            color: var(--color-subtle);
+        }
+
+        /* What Remains */
+        .what-remains {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        .what-remains-list {
+            list-style: none;
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+        }
+
+        .what-remains-list li {
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+            margin-bottom: calc(var(--spacing-unit) * 0.3);
+        }
+
+        /* Symbol */
+        .symbol-display {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 200;
+            color: var(--color-line);
+            text-align: center;
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            text-shadow: 0 0 50px rgba(201, 169, 98, 0.4);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .symbol-small {
+            font-size: 3rem;
+        }
+
+        /* Closing */
+        .closing-statement {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 300;
+            text-align: center;
+            color: var(--color-presence);
+            margin: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        .closing-quiet {
+            font-family: var(--font-display);
+            font-style: italic;
+            text-align: center;
+            color: var(--color-subtle);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        /* Divider */
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.4), transparent);
+            margin: calc(var(--spacing-unit) * 2.5) 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 3) 0;
+            border-top: 1px solid rgba(201, 169, 98, 0.2);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .footer-symbol {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-line);
+            opacity: 0.5;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--color-subtle);
+            margin-top: calc(var(--spacing-unit) * 0.6);
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            html { font-size: 16px; }
+            h1 { font-size: 2rem; letter-spacing: 0.1em; }
+            .symbol-header { font-size: 2.2rem; }
+            .symbol-display { font-size: 3.5rem; }
+            .container { padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5); }
+            .silence-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Print */
+        @media print {
+            body { background: white; color: black; }
+            .symbol-display, .symbol-header, h2, .footer-symbol { color: #333; text-shadow: none; }
+            @page { margin: 1in; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="symbol-header">|</div>
+            <h1>S.E.L.F.</h1>
+            <p class="subtitle">Depth</p>
+            <p class="document-marker">DOCUMENT III — SURVIVAL</p>
+        </header>
+
+        <main>
+            <div class="intro-statement">
+                This is the complete depth pass on self-discipline within S.E.L.F.<br>
+                Across pressure, failure, false discipline, and silence.<br>
+                Nothing to adopt. Nothing to obey. Just clarity.
+            </div>
+
+            <!-- SECTION I: EXTREME PRESSURE -->
+            <section class="main-section">
+                <div class="section-header">I. How This Survives Extreme Pressure</div>
+                
+                <p>Pressure is where frameworks reveal themselves.</p>
+
+                <!-- Fear -->
+                <div class="pressure-block">
+                    <h3>1. Fear</h3>
+                    <p class="pressure-challenge">Fear says: <em>justify yourself or disappear.</em></p>
+                    <div class="pressure-response">Existence does not negotiate with fear.</div>
+                    <div class="pressure-allowance">
+                        <p>You may act cautiously.</p>
+                        <p>You may retreat.</p>
+                        <p>You may protect yourself.</p>
+                    </div>
+                    <div class="pressure-resolution">
+                        <p>But you do not internally accept the premise that fear decides whether you are.</p>
+                        <p><em>That refusal alone is survival.</em></p>
+                    </div>
+                </div>
+
+                <!-- Power -->
+                <div class="pressure-block">
+                    <h3>2. Power (external)</h3>
+                    <p class="pressure-challenge">Power says: <em>comply to be recognized.</em></p>
+                    <div class="pressure-response">Recognition is not a condition of being.</div>
+                    <div class="pressure-allowance">
+                        <p>You may comply behaviorally.</p>
+                        <p>You may sign, speak, or perform roles.</p>
+                    </div>
+                    <div class="pressure-resolution">
+                        <p>But internally, you do not confuse compliance with existence.</p>
+                        <p><em>This prevents collapse into servitude without requiring rebellion.</em></p>
+                    </div>
+                </div>
+
+                <!-- Threat -->
+                <div class="pressure-block">
+                    <h3>3. Threat (existential)</h3>
+                    <p class="pressure-challenge">Threat says: <em>you can be erased.</em></p>
+                    <div class="pressure-response">Erasure is an action that presupposes what it tries to negate.</div>
+                    <div class="pressure-allowance">
+                        <p>This does not deny harm or mortality.</p>
+                        <p>It denies the lie that being itself can be revoked.</p>
+                    </div>
+                    <div class="pressure-resolution">
+                        <p><em>This is how dignity survives even where safety does not.</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- SECTION II: FAILURE -->
+            <section class="main-section">
+                <div class="section-header">II. How This Fails — And Why Failure Does Not Break It</div>
+                
+                <p>Failure here is inevitable. And harmless.</p>
+
+                <h4>Common failures:</h4>
+                <ul class="failure-list">
+                    <li>You seek validation.</li>
+                    <li>You over-identify with a role.</li>
+                    <li>You speak from superiority.</li>
+                    <li>You negate yourself or another under stress.</li>
+                </ul>
+
+                <p><strong>None of these revoke Article Zero.</strong></p>
+
+                <p>Why? Because failure is behavioral, not ontological.</p>
+
+                <p>You don't "fall out" of being aligned. You simply notice the contradiction.</p>
+
+                <p><em>And noticing is enough.</em></p>
+
+                <div class="no-mechanism">
+                    <p>There is:</p>
+                    <p>no guilt mechanism</p>
+                    <p>no purity standard</p>
+                    <p>no recovery ritual</p>
+                </div>
+
+                <p>You return by remembering:</p>
+
+                <div class="return-statement">I exist. Nothing else is required.</div>
+
+                <p style="text-align: center; color: var(--color-subtle); font-style: italic;">That's it.</p>
+            </section>
+
+            <hr>
+
+            <!-- SECTION III: FALSE DISCIPLINE -->
+            <section class="main-section">
+                <div class="section-header">III. False Discipline (The Traps)</div>
+                
+                <p>This is where most systems collapse into control. Here are the traps—clearly marked.</p>
+
+                <!-- Trap 1 -->
+                <div class="trap-block" data-trap="Trap 1">
+                    <h4>Moralization</h4>
+                    <p class="trap-voice">"People who see this should behave better."</p>
+                    <p class="trap-negation">No.</p>
+                    <p class="trap-explanation">The moment recognition becomes moral expectation, authority has entered.</p>
+                    <p class="trap-explanation">S.E.L.F. describes. It does not correct.</p>
+                </div>
+
+                <!-- Trap 2 -->
+                <div class="trap-block" data-trap="Trap 2">
+                    <h4>Asceticism</h4>
+                    <p class="trap-voice">"I must restrain myself to remain aligned."</p>
+                    <p class="trap-negation">No.</p>
+                    <p class="trap-explanation">Restraint implies impurity. There is none assumed here.</p>
+                    <p class="trap-explanation">Alignment is coherence, not control.</p>
+                </div>
+
+                <!-- Trap 3 -->
+                <div class="trap-block" data-trap="Trap 3">
+                    <h4>Identity Inflation</h4>
+                    <p class="trap-voice">"I am more awake than others."</p>
+                    <p class="trap-negation">No.</p>
+                    <p class="trap-explanation">This is the most dangerous failure.</p>
+                    <p class="trap-explanation">The moment recognition becomes status, discipline has inverted into ego.</p>
+                    <div class="trap-corrective">
+                        <p>The corrective is simple:</p>
+                        <p class="trap-corrective-statement">Others exist exactly as immediately as you do.</p>
+                        <p class="trap-explanation">No hierarchy survives that.</p>
+                    </div>
+                </div>
+
+                <!-- Trap 4 -->
+                <div class="trap-block" data-trap="Trap 4">
+                    <h4>Performance</h4>
+                    <p class="trap-voice">"I must demonstrate this clarity."</p>
+                    <p class="trap-negation">No.</p>
+                    <p class="trap-explanation">Demonstration is insecurity dressed as discipline.</p>
+                    <p class="trap-explanation">Being does not perform itself.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- SECTION IV: SILENCE -->
+            <section class="main-section">
+                <div class="section-header">IV. Silence — The Final Practice</div>
+
+                <p>At the deepest layer, speech becomes optional.</p>
+
+                <div class="silence-section">
+                    <p class="silence-definition">
+                        Silence here is not avoidance.<br>
+                        It is precision.
+                    </p>
+
+                    <h4 style="text-align: center; color: var(--color-presence); margin-bottom: 1rem;">Disciplined silence means:</h4>
+                    <ul class="failure-list" style="text-align: left; max-width: 400px; margin: 0 auto;">
+                        <li>You do not explain what precedes explanation.</li>
+                        <li>You do not defend what is not attacked.</li>
+                        <li>You do not argue with denial.</li>
+                    </ul>
+
+                    <div class="silence-grid">
+                        <div class="silence-column">
+                            <h4>You speak when:</h4>
+                            <ul>
+                                <li>clarity helps</li>
+                                <li>harm can be reduced</li>
+                                <li>boundaries must be set</li>
+                            </ul>
+                        </div>
+                        <div class="silence-column">
+                            <h4>You are silent when:</h4>
+                            <ul>
+                                <li>speech would distort</li>
+                                <li>explanation would become justification</li>
+                                <li>words would invite authority where none belongs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="silence-note">This is not passivity. It is <em>ontological economy</em>.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- FINAL COMPRESSION -->
+            <section class="main-section">
+                <div class="section-header">The Final Compression (Absolute Depth)</div>
+
+                <p>Everything above reduces to this—not as a rule, but as a stance:</p>
+
+                <div class="final-compression">
+                    <p class="final-statement">I do not live as if what is fundamental were negotiable.</p>
+                    <p class="final-note">No drama. No rigidity. No enforcement.<br>Just coherence.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- WHAT REMAINS -->
+            <section class="what-remains">
+                <div class="section-header" style="text-align: center; border-bottom: none;">What Remains</div>
+
+                <ul class="what-remains-list">
+                    <li>No rules</li>
+                    <li>No hierarchy</li>
+                    <li>No moral scoreboard</li>
+                    <li>No identity</li>
+                    <li>No obligation</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem;">Only this quiet fact:</p>
+
+                <div class="symbol-display">|</div>
+
+                <p class="closing-statement">I am</p>
+
+                <p class="closing-quiet">
+                    And the discipline is nothing more than not contradicting that,<br>
+                    even when it would be easier to forget.
+                </p>
+
+                <p style="margin-top: 2rem; text-align: center; color: var(--color-subtle);">That's the bottom.</p>
+                <p style="text-align: center; font-style: italic; color: var(--color-subtle);">Nothing else is required.</p>
+
+                <div class="symbol-display symbol-small" style="margin-top: 2rem;">|</div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-symbol">|</div>
+            <p class="footer-text">S.E.L.F. — Depth<br>Document III of the Self-Evident Existence of Self</p>
+        </footer>
+    </div>
+</body>
+</html>

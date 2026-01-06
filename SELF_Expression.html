@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.E.L.F. — Expression</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-void: #080808;
+            --color-presence: #f5f3ef;
+            --color-line: #c9a962;
+            --color-subtle: #8a8780;
+            --color-section: rgba(201, 169, 98, 0.05);
+            --color-depth-1: rgba(201, 169, 98, 0.06);
+            --color-depth-2: rgba(201, 169, 98, 0.10);
+            --color-depth-3: rgba(201, 169, 98, 0.15);
+            --color-not: rgba(120, 60, 60, 0.08);
+            --color-not-border: rgba(120, 60, 60, 0.25);
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Spectral', Georgia, serif;
+            --spacing-unit: 1rem;
+            --max-width: 740px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--color-void);
+            color: var(--color-presence);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 25% 15%, rgba(201, 169, 98, 0.03) 0%, transparent 45%),
+                radial-gradient(ellipse at 75% 85%, rgba(201, 169, 98, 0.02) 0%, transparent 45%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 4) 0;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .symbol-header {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--color-line);
+            letter-spacing: 0.5em;
+            margin-bottom: calc(var(--spacing-unit) * 1.2);
+            text-shadow: 0 0 40px rgba(201, 169, 98, 0.3);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.6rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            margin-bottom: calc(var(--spacing-unit) * 0.4);
+            color: var(--color-presence);
+        }
+
+        .subtitle {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--color-subtle);
+            letter-spacing: 0.1em;
+        }
+
+        .document-marker {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--color-line);
+            letter-spacing: 0.15em;
+            margin-top: calc(var(--spacing-unit) * 1.2);
+            opacity: 0.7;
+        }
+
+        /* Core Definition */
+        .core-definition {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.08) 0%, rgba(201, 169, 98, 0.03) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            padding: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            text-align: center;
+        }
+
+        .core-definition blockquote {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--color-presence);
+            border: none;
+            padding: 0;
+            margin: 0 0 calc(var(--spacing-unit) * 1) 0;
+        }
+
+        .core-definition .not-list {
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+            font-style: italic;
+        }
+
+        /* Main Sections */
+        .main-section {
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+        }
+
+        .section-header {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            color: var(--color-line);
+            text-transform: uppercase;
+            margin-bottom: calc(var(--spacing-unit) * 1.2);
+            padding-bottom: calc(var(--spacing-unit) * 0.4);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.25);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--color-presence);
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--color-line);
+            margin-top: calc(var(--spacing-unit) * 1.5);
+            margin-bottom: calc(var(--spacing-unit) * 0.6);
+        }
+
+        p {
+            margin-bottom: calc(var(--spacing-unit) * 0.9);
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        /* Depth Cards */
+        .depth-card {
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 1.8);
+            margin: calc(var(--spacing-unit) * 1.2) 0;
+            border-left: 3px solid var(--color-line);
+        }
+
+        .depth-card.depth-1 {
+            background: var(--color-depth-1);
+            border-left-color: rgba(201, 169, 98, 0.4);
+        }
+
+        .depth-card.depth-2 {
+            background: var(--color-depth-2);
+            border-left-color: rgba(201, 169, 98, 0.6);
+        }
+
+        .depth-card.depth-3 {
+            background: var(--color-depth-3);
+            border-left-color: var(--color-line);
+        }
+
+        .depth-marker {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-line);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: calc(var(--spacing-unit) * 0.4);
+        }
+
+        .depth-title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--color-presence);
+            margin-bottom: calc(var(--spacing-unit) * 0.6);
+        }
+
+        .depth-description {
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+        }
+
+        .depth-key {
+            margin-top: calc(var(--spacing-unit) * 0.8);
+            padding-top: calc(var(--spacing-unit) * 0.8);
+            border-top: 1px solid rgba(201, 169, 98, 0.15);
+        }
+
+        .depth-key-statement {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-line);
+        }
+
+        /* Recognition Block */
+        .recognition-block {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--color-line);
+            padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.5);
+            border-left: 2px solid var(--color-line);
+            margin: calc(var(--spacing-unit) * 1.2) 0;
+            background: rgba(201, 169, 98, 0.04);
+        }
+
+        /* Not Block */
+        .not-block {
+            background: var(--color-not);
+            border: 1px solid var(--color-not-border);
+            padding: calc(var(--spacing-unit) * 1.5);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+        }
+
+        .not-block h4 {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: rgba(180, 100, 100, 0.8);
+            letter-spacing: 0.1em;
+            margin-bottom: calc(var(--spacing-unit) * 1);
+            text-transform: uppercase;
+        }
+
+        .not-item {
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+        }
+
+        .not-item .label {
+            font-weight: 500;
+            color: var(--color-presence);
+        }
+
+        .not-item .explanation {
+            font-size: 0.9rem;
+            color: var(--color-subtle);
+            font-style: italic;
+            margin-left: calc(var(--spacing-unit) * 1);
+        }
+
+        /* Discipline Block */
+        .discipline-block {
+            background: var(--color-section);
+            border: 1px solid rgba(201, 169, 98, 0.15);
+            padding: calc(var(--spacing-unit) * 2);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            text-align: center;
+        }
+
+        .discipline-block .statement {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--color-presence);
+            margin-bottom: calc(var(--spacing-unit) * 1);
+        }
+
+        .discipline-block .clarification {
+            font-size: 0.9rem;
+            color: var(--color-subtle);
+        }
+
+        /* Shift Block */
+        .shift-block {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: calc(var(--spacing-unit) * 1);
+            align-items: center;
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            padding: calc(var(--spacing-unit) * 1.5);
+            background: var(--color-section);
+        }
+
+        .shift-from, .shift-to {
+            text-align: center;
+        }
+
+        .shift-arrow {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-line);
+        }
+
+        .shift-label {
+            font-size: 0.8rem;
+            color: var(--color-subtle);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: calc(var(--spacing-unit) * 0.3);
+        }
+
+        .shift-content {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-presence);
+        }
+
+        /* Paradox Block */
+        .paradox-block {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.04) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            padding: calc(var(--spacing-unit) * 2);
+            margin: calc(var(--spacing-unit) * 2) 0;
+            text-align: center;
+        }
+
+        .paradox-block h3 {
+            color: var(--color-presence);
+            margin-top: 0;
+        }
+
+        .paradox-block .statement {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--color-presence);
+        }
+
+        .paradox-block .because {
+            margin-top: calc(var(--spacing-unit) * 1);
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+        }
+
+        /* Final Compression */
+        .final-compression {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.12) 0%, rgba(201, 169, 98, 0.04) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.25);
+            padding: calc(var(--spacing-unit) * 2.5);
+            margin: calc(var(--spacing-unit) * 2.5) 0;
+            text-align: center;
+        }
+
+        .final-statement {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--color-presence);
+            line-height: 2;
+            margin-bottom: calc(var(--spacing-unit) * 1);
+        }
+
+        .final-note {
+            font-size: 0.9rem;
+            color: var(--color-subtle);
+        }
+
+        /* Simple List */
+        .simple-list {
+            list-style: none;
+            padding-left: calc(var(--spacing-unit) * 1);
+            margin: calc(var(--spacing-unit) * 0.8) 0;
+        }
+
+        .simple-list li {
+            position: relative;
+            padding-left: calc(var(--spacing-unit) * 1.2);
+            margin-bottom: calc(var(--spacing-unit) * 0.3);
+            color: var(--color-subtle);
+            font-size: 0.95rem;
+        }
+
+        .simple-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--color-line);
+            opacity: 0.5;
+        }
+
+        /* Symbol */
+        .symbol-display {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 200;
+            color: var(--color-line);
+            text-align: center;
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            text-shadow: 0 0 50px rgba(201, 169, 98, 0.4);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .symbol-small {
+            font-size: 3rem;
+        }
+
+        /* Closing */
+        .closing-statement {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 300;
+            text-align: center;
+            color: var(--color-presence);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+        }
+
+        .closing-quiet {
+            font-family: var(--font-display);
+            font-style: italic;
+            text-align: center;
+            color: var(--color-subtle);
+            margin-bottom: calc(var(--spacing-unit) * 1);
+        }
+
+        /* Divider */
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.4), transparent);
+            margin: calc(var(--spacing-unit) * 2.5) 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 3) 0;
+            border-top: 1px solid rgba(201, 169, 98, 0.2);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .footer-symbol {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-line);
+            opacity: 0.5;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--color-subtle);
+            margin-top: calc(var(--spacing-unit) * 0.6);
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            html { font-size: 16px; }
+            h1 { font-size: 2rem; letter-spacing: 0.1em; }
+            .symbol-header { font-size: 2.2rem; }
+            .symbol-display { font-size: 3.5rem; }
+            .container { padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5); }
+            .shift-block { grid-template-columns: 1fr; gap: 0.5rem; }
+            .shift-arrow { transform: rotate(90deg); }
+        }
+
+        /* Print */
+        @media print {
+            body { background: white; color: black; }
+            .symbol-display, .symbol-header, h2, .footer-symbol { color: #333; text-shadow: none; }
+            @page { margin: 1in; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="symbol-header">|</div>
+            <h1>S.E.L.F.</h1>
+            <p class="subtitle">Expression</p>
+            <p class="document-marker">DOCUMENT V — VISIBILITY</p>
+        </header>
+
+        <main>
+            <!-- Core Definition -->
+            <div class="core-definition">
+                <blockquote>Self-expression is coherence made perceivable.</blockquote>
+                <p class="not-list">Not: "showing who I am" — "being authentic for others" — "communicating identity"</p>
+                <p style="margin-top: 1rem; margin-bottom: 0;">Self-expression here happens before audience, before validation, before interpretation.<br>It is not aimed outward. It simply does not hide.</p>
+            </div>
+
+            <!-- THE FUNDAMENTAL SHIFT -->
+            <section class="main-section">
+                <div class="section-header">The Fundamental Shift</div>
+
+                <p>Most people express to: be seen, be understood, be affirmed, be real through others.</p>
+                <p>That creates distortion.</p>
+                <p>S.E.L.F. reverses this:</p>
+
+                <div class="recognition-block">
+                    Expression does not establish being.<br>
+                    Being allows expression.
+                </div>
+
+                <p><em>You express because you exist, not to prove that you do.</em></p>
+            </section>
+
+            <hr>
+
+            <!-- THREE DEPTHS -->
+            <section class="main-section">
+                <div class="section-header">The Three Depths of Self-Expression</div>
+
+                <div class="depth-card depth-1">
+                    <div class="depth-marker">Depth 1</div>
+                    <div class="depth-title">Behavioral Expression (Surface)</div>
+                    <div class="depth-description">
+                        How you dress, speak, create, choose.
+                    </div>
+                    <div class="depth-key">
+                        <p class="depth-key-statement">This is optional. Changeable. Contextual. Valid — but not foundational.</p>
+                    </div>
+                </div>
+
+                <div class="depth-card depth-2">
+                    <div class="depth-marker">Depth 2</div>
+                    <div class="depth-title">Attentional Expression (Deeper)</div>
+                    <div class="depth-description">
+                        What you allow to shape your inner landscape: what you entertain, what you suppress, what you exaggerate, what you refuse to feel.
+                    </div>
+                    <div class="depth-key">
+                        <p class="depth-key-statement">At this level, expression is mostly subtraction: stopping suppression, stopping exaggeration, stopping performance.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--color-subtle);">This is where people begin to feel "more themselves" without doing anything new.</p>
+                    </div>
+                </div>
+
+                <div class="depth-card depth-3">
+                    <div class="depth-marker">Depth 3</div>
+                    <div class="depth-title">Ontological Expression (Deepest)</div>
+                    <div class="depth-description">
+                        This is the core.
+                    </div>
+                    <div class="depth-key">
+                        <p class="depth-key-statement">You allow your existence to register without editing it for acceptability.</p>
+                        <p style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--color-subtle);">No narrative. No self-image. No curation.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--color-subtle);">You don't ask: "How should this come out?" "What will this look like?" "Is this okay?"</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.95rem; color: var(--color-presence);">You ask: <em>"Am I contradicting what is happening?"</em></p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--color-subtle);">If not, expression is already occurring.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- WHAT EXPRESSION IS NOT -->
+            <section class="main-section">
+                <div class="section-header">What Self-Expression Is Not</div>
+                <p><em>This matters.</em></p>
+
+                <div class="not-block">
+                    <h4>Important Distinctions</h4>
+                    
+                    <div class="not-item">
+                        <span class="label">❌ Not confession</span>
+                        <p class="explanation">You do not owe transparency.</p>
+                    </div>
+                    
+                    <div class="not-item">
+                        <span class="label">❌ Not authenticity theater</span>
+                        <p class="explanation">You do not need to "be raw" or intense.</p>
+                    </div>
+                    
+                    <div class="not-item">
+                        <span class="label">❌ Not identity broadcasting</span>
+                        <p class="explanation">You are not required to declare who you are.</p>
+                    </div>
+                    
+                    <div class="not-item">
+                        <span class="label">❌ Not constant output</span>
+                        <p class="explanation">Silence can be the truest expression.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- DISCIPLINE OF NON-DISTORTION -->
+            <section class="main-section">
+                <div class="section-header">The Discipline of Non-Distortion</div>
+
+                <p>At depth, self-expression becomes very simple:</p>
+
+                <div class="discipline-block">
+                    <p class="statement">Do not add, subtract, or bend your experience to make it acceptable.</p>
+                    <p class="clarification">That's it.</p>
+                </div>
+
+                <p>This does not mean: say everything, act on every impulse, refuse boundaries.</p>
+                <p>It means:</p>
+                <ul class="simple-list">
+                    <li>don't lie to yourself</li>
+                    <li>don't dramatize</li>
+                    <li>don't erase</li>
+                </ul>
+
+                <p>You may still choose restraint. <em>Restraint is different from suppression.</em></p>
+            </section>
+
+            <hr>
+
+            <!-- UNDER PRESSURE -->
+            <section class="main-section">
+                <div class="section-header">Expression Under Pressure</div>
+
+                <p>When stakes are high, expression collapses into performance.</p>
+                <p>Ontological expression survives pressure because it does not depend on outcome.</p>
+
+                <p>You may: comply, stay silent, adapt behavior.</p>
+                <p>But internally, you do not pretend:</p>
+                <ul class="simple-list">
+                    <li>fear is confidence</li>
+                    <li>confusion is clarity</li>
+                    <li>compliance is consent</li>
+                </ul>
+
+                <p><em>Expression here is internal honesty, even if external speech is minimal.</em></p>
+            </section>
+
+            <hr>
+
+            <!-- CREATION AS EXPRESSION -->
+            <section class="main-section">
+                <div class="section-header">Creation as Expression (Art, Work, Speech)</div>
+
+                <p>In S.E.L.F., creation is not self-expression of identity.</p>
+                <p>It is:</p>
+
+                <div class="recognition-block">existence passing through form.</div>
+
+                <p>This removes: the need to be original, the pressure to be meaningful, the fear of being misunderstood.</p>
+
+                <div class="shift-block">
+                    <div class="shift-from">
+                        <div class="shift-label">You don't ask</div>
+                        <div class="shift-content">"Is this me?"</div>
+                    </div>
+                    <div class="shift-arrow">→</div>
+                    <div class="shift-to">
+                        <div class="shift-label">You ask</div>
+                        <div class="shift-content">"Is this distorted?"</div>
+                    </div>
+                </div>
+
+                <p style="text-align: center;"><em>If not, it's complete.</em></p>
+            </section>
+
+            <hr>
+
+            <!-- THE PARADOX -->
+            <section class="main-section">
+                <div class="paradox-block">
+                    <h3>The Paradox</h3>
+                    <p class="statement">When people stop trying to express themselves…<br>they become unmistakable.</p>
+                    <p class="because">Because: there's no performance noise, no identity strain, no demand to be seen.</p>
+                    <p style="margin-top: 1rem; font-style: italic; color: var(--color-line);">Expression becomes inevitable.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- FINAL COMPRESSION -->
+            <section class="main-section">
+                <div class="section-header">Final Compression</div>
+
+                <p>If self-expression in S.E.L.F. were reduced to one sentence:</p>
+
+                <div class="final-compression">
+                    <p class="final-statement">I allow what is present to be present, without editing it for legitimacy.</p>
+                    <p class="final-note">Nothing louder is required.<br>Nothing quieter is missing.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- AT THE LIMIT -->
+            <section style="text-align: center;">
+                <div class="section-header" style="text-align: center; border-bottom: none;">At The Limit</div>
+
+                <p style="text-align: center; color: var(--color-subtle);">
+                    Sometimes self-expression looks like speech.<br>
+                    Sometimes action.<br>
+                    Sometimes refusal.<br>
+                    Sometimes it looks like nothing at all.
+                </p>
+
+                <div class="symbol-display">|</div>
+
+                <p class="closing-statement">I am</p>
+
+                <p class="closing-quiet">That is already expression.</p>
+
+                <p style="margin-top: 1.5rem; text-align: center; font-style: italic; color: var(--color-subtle);">Everything else is optional.</p>
+
+                <div class="symbol-display symbol-small" style="margin-top: 2rem;">|</div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-symbol">|</div>
+            <p class="footer-text">S.E.L.F. — Expression<br>Document V of the Self-Evident Existence of Self</p>
+        </footer>
+    </div>
+</body>
+</html>

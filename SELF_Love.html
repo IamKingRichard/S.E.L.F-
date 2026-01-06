@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.E.L.F. — Love</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-void: #080808;
+            --color-presence: #f5f3ef;
+            --color-line: #c9a962;
+            --color-subtle: #8a8780;
+            --color-section: rgba(201, 169, 98, 0.05);
+            --color-depth-1: rgba(201, 169, 98, 0.06);
+            --color-depth-2: rgba(201, 169, 98, 0.10);
+            --color-depth-3: rgba(201, 169, 98, 0.15);
+            --color-pressure: rgba(201, 169, 98, 0.08);
+            --color-not: rgba(120, 60, 60, 0.08);
+            --color-not-border: rgba(120, 60, 60, 0.25);
+            --color-marker: rgba(80, 140, 80, 0.08);
+            --color-marker-border: rgba(80, 140, 80, 0.25);
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Spectral', Georgia, serif;
+            --spacing-unit: 1rem;
+            --max-width: 740px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--color-void);
+            color: var(--color-presence);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 15%, rgba(201, 169, 98, 0.03) 0%, transparent 45%),
+                radial-gradient(ellipse at 80% 85%, rgba(201, 169, 98, 0.02) 0%, transparent 45%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 4) 0;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .symbol-header {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--color-line);
+            letter-spacing: 0.5em;
+            margin-bottom: calc(var(--spacing-unit) * 1.2);
+            text-shadow: 0 0 40px rgba(201, 169, 98, 0.3);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.6rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            margin-bottom: calc(var(--spacing-unit) * 0.4);
+            color: var(--color-presence);
+        }
+
+        .subtitle {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--color-subtle);
+            letter-spacing: 0.1em;
+        }
+
+        .document-marker {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--color-line);
+            letter-spacing: 0.15em;
+            margin-top: calc(var(--spacing-unit) * 1.2);
+            opacity: 0.7;
+        }
+
+        /* Core Definition */
+        .core-definition {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.08) 0%, rgba(201, 169, 98, 0.03) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            padding: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            text-align: center;
+        }
+
+        .core-definition blockquote {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--color-presence);
+            border: none;
+            padding: 0;
+            margin: 0 0 calc(var(--spacing-unit) * 1) 0;
+        }
+
+        .core-definition .clarification {
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+        }
+
+        /* Main Sections */
+        .main-section {
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+        }
+
+        .section-header {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            color: var(--color-line);
+            text-transform: uppercase;
+            margin-bottom: calc(var(--spacing-unit) * 1.2);
+            padding-bottom: calc(var(--spacing-unit) * 0.4);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.25);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--color-presence);
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--color-line);
+            margin-top: calc(var(--spacing-unit) * 1.5);
+            margin-bottom: calc(var(--spacing-unit) * 0.6);
+        }
+
+        p {
+            margin-bottom: calc(var(--spacing-unit) * 0.9);
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        /* Problem Block */
+        .problem-block {
+            background: var(--color-section);
+            border-left: 3px solid rgba(180, 100, 100, 0.4);
+            padding: calc(var(--spacing-unit) * 1.5);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+        }
+
+        .problem-block p {
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            text-align: left;
+        }
+
+        .problem-consequence {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-subtle);
+            margin-top: calc(var(--spacing-unit) * 0.8);
+            padding-top: calc(var(--spacing-unit) * 0.8);
+            border-top: 1px solid rgba(201, 169, 98, 0.15);
+        }
+
+        /* Depth Cards */
+        .depth-card {
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 1.8);
+            margin: calc(var(--spacing-unit) * 1.2) 0;
+            border-left: 3px solid var(--color-line);
+        }
+
+        .depth-card.depth-1 {
+            background: var(--color-depth-1);
+            border-left-color: rgba(201, 169, 98, 0.4);
+        }
+
+        .depth-card.depth-2 {
+            background: var(--color-depth-2);
+            border-left-color: rgba(201, 169, 98, 0.6);
+        }
+
+        .depth-card.depth-3 {
+            background: var(--color-depth-3);
+            border-left-color: var(--color-line);
+        }
+
+        .depth-marker {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-line);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: calc(var(--spacing-unit) * 0.4);
+        }
+
+        .depth-title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--color-presence);
+            margin-bottom: calc(var(--spacing-unit) * 0.6);
+        }
+
+        .depth-description {
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+        }
+
+        .depth-key {
+            margin-top: calc(var(--spacing-unit) * 0.8);
+            padding-top: calc(var(--spacing-unit) * 0.8);
+            border-top: 1px solid rgba(201, 169, 98, 0.15);
+        }
+
+        .depth-key-statement {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-line);
+        }
+
+        /* Shift Block */
+        .shift-block {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: calc(var(--spacing-unit) * 1);
+            align-items: center;
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            padding: calc(var(--spacing-unit) * 1.5);
+            background: var(--color-section);
+        }
+
+        .shift-from, .shift-to {
+            text-align: center;
+        }
+
+        .shift-arrow {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-line);
+        }
+
+        .shift-label {
+            font-size: 0.8rem;
+            color: var(--color-subtle);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: calc(var(--spacing-unit) * 0.3);
+        }
+
+        .shift-content {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-presence);
+        }
+
+        /* Recognition Block */
+        .recognition-block {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--color-line);
+            padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.5);
+            border-left: 2px solid var(--color-line);
+            margin: calc(var(--spacing-unit) * 1.2) 0;
+            background: rgba(201, 169, 98, 0.04);
+        }
+
+        /* Not Block */
+        .not-block {
+            background: var(--color-not);
+            border: 1px solid var(--color-not-border);
+            padding: calc(var(--spacing-unit) * 1.5);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+        }
+
+        .not-block h4 {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: rgba(180, 100, 100, 0.8);
+            letter-spacing: 0.1em;
+            margin-bottom: calc(var(--spacing-unit) * 1);
+            text-transform: uppercase;
+        }
+
+        .not-item {
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+        }
+
+        .not-item .label {
+            font-weight: 500;
+            color: var(--color-presence);
+        }
+
+        .not-item .explanation {
+            font-size: 0.9rem;
+            color: var(--color-subtle);
+            font-style: italic;
+            margin-left: calc(var(--spacing-unit) * 1);
+        }
+
+        /* Pressure Block */
+        .pressure-block {
+            background: var(--color-pressure);
+            border-left: 3px solid var(--color-line);
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 1.8);
+            margin: calc(var(--spacing-unit) * 1.2) 0;
+        }
+
+        .pressure-context {
+            font-family: var(--font-display);
+            font-weight: 500;
+            color: var(--color-presence);
+            margin-bottom: calc(var(--spacing-unit) * 0.6);
+        }
+
+        .pressure-not {
+            font-size: 0.9rem;
+            color: var(--color-subtle);
+            font-style: italic;
+            margin-bottom: calc(var(--spacing-unit) * 0.6);
+        }
+
+        .pressure-response {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            color: var(--color-line);
+            padding: calc(var(--spacing-unit) * 0.6) calc(var(--spacing-unit) * 1);
+            border-left: 2px solid var(--color-line);
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        .pressure-note {
+            margin-top: calc(var(--spacing-unit) * 0.6);
+            font-size: 0.9rem;
+            color: var(--color-subtle);
+            font-style: italic;
+        }
+
+        /* Marker Block */
+        .marker-block {
+            background: var(--color-marker);
+            border: 1px solid var(--color-marker-border);
+            padding: calc(var(--spacing-unit) * 1.5);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+        }
+
+        .marker-block h4 {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: rgba(80, 140, 80, 0.9);
+            letter-spacing: 0.1em;
+            margin-bottom: calc(var(--spacing-unit) * 1);
+            text-transform: uppercase;
+        }
+
+        .marker-list {
+            list-style: none;
+        }
+
+        .marker-list li {
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            padding-left: calc(var(--spacing-unit) * 1.2);
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+        }
+
+        .marker-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: rgba(80, 140, 80, 0.7);
+        }
+
+        .marker-note {
+            margin-top: calc(var(--spacing-unit) * 1);
+            padding-top: calc(var(--spacing-unit) * 0.8);
+            border-top: 1px solid rgba(80, 140, 80, 0.2);
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--color-presence);
+            text-align: center;
+        }
+
+        /* Paradox Block */
+        .paradox-block {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.04) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            padding: calc(var(--spacing-unit) * 2);
+            margin: calc(var(--spacing-unit) * 2) 0;
+            text-align: center;
+        }
+
+        .paradox-block h3 {
+            color: var(--color-presence);
+            margin-top: 0;
+        }
+
+        .paradox-block .statement {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--color-presence);
+        }
+
+        .paradox-block .because {
+            margin-top: calc(var(--spacing-unit) * 1);
+            font-size: 0.95rem;
+            color: var(--color-line);
+            font-style: italic;
+        }
+
+        /* Final Compression */
+        .final-compression {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.12) 0%, rgba(201, 169, 98, 0.04) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.25);
+            padding: calc(var(--spacing-unit) * 2.5);
+            margin: calc(var(--spacing-unit) * 2.5) 0;
+            text-align: center;
+        }
+
+        .final-statement {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--color-presence);
+            line-height: 1.9;
+            margin-bottom: calc(var(--spacing-unit) * 1);
+        }
+
+        .final-note {
+            font-size: 0.9rem;
+            color: var(--color-subtle);
+        }
+
+        /* Simple List */
+        .simple-list {
+            list-style: none;
+            padding-left: calc(var(--spacing-unit) * 1);
+            margin: calc(var(--spacing-unit) * 0.8) 0;
+        }
+
+        .simple-list li {
+            position: relative;
+            padding-left: calc(var(--spacing-unit) * 1.2);
+            margin-bottom: calc(var(--spacing-unit) * 0.3);
+            color: var(--color-subtle);
+            font-size: 0.95rem;
+        }
+
+        .simple-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--color-line);
+            opacity: 0.5;
+        }
+
+        /* Symbol */
+        .symbol-display {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 200;
+            color: var(--color-line);
+            text-align: center;
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            text-shadow: 0 0 50px rgba(201, 169, 98, 0.4);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .symbol-small {
+            font-size: 3rem;
+        }
+
+        /* Closing */
+        .closing-statement {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 300;
+            text-align: center;
+            color: var(--color-presence);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+        }
+
+        .closing-quiet {
+            font-family: var(--font-display);
+            font-style: italic;
+            text-align: center;
+            color: var(--color-subtle);
+            margin-bottom: calc(var(--spacing-unit) * 1);
+        }
+
+        /* Divider */
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.4), transparent);
+            margin: calc(var(--spacing-unit) * 2.5) 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 3) 0;
+            border-top: 1px solid rgba(201, 169, 98, 0.2);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .footer-symbol {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-line);
+            opacity: 0.5;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--color-subtle);
+            margin-top: calc(var(--spacing-unit) * 0.6);
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            html { font-size: 16px; }
+            h1 { font-size: 2rem; letter-spacing: 0.1em; }
+            .symbol-header { font-size: 2.2rem; }
+            .symbol-display { font-size: 3.5rem; }
+            .container { padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5); }
+            .shift-block { grid-template-columns: 1fr; gap: 0.5rem; }
+            .shift-arrow { transform: rotate(90deg); }
+        }
+
+        /* Print */
+        @media print {
+            body { background: white; color: black; }
+            .symbol-display, .symbol-header, h2, .footer-symbol { color: #333; text-shadow: none; }
+            @page { margin: 1in; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="symbol-header">|</div>
+            <h1>S.E.L.F.</h1>
+            <p class="subtitle">Love</p>
+            <p class="document-marker">DOCUMENT VII — PRESENCE</p>
+        </header>
+
+        <main>
+            <!-- WHY MISUNDERSTOOD -->
+            <section class="main-section">
+                <div class="section-header">Why Self-Love Is Usually Misunderstood</div>
+
+                <p>Most models treat self-love as: liking yourself, feeling compassion for yourself, affirming your worth, treating yourself kindly.</p>
+                <p>Those can be good — but they are unstable.</p>
+                <p>Why?</p>
+
+                <div class="problem-block">
+                    <p>Because they assume:</p>
+                    <p style="font-family: var(--font-display); font-style: italic; color: var(--color-line);">You must generate love toward yourself.</p>
+                    <p class="problem-consequence">
+                        Which means: if you don't feel it, you're failing.<br>
+                        If you're angry, ashamed, or numb, you're "doing it wrong."
+                    </p>
+                </div>
+
+                <p>That turns love into labor.</p>
+                <p><em>S.E.L.F. does not do that.</em></p>
+            </section>
+
+            <hr>
+
+            <!-- REDEFINED -->
+            <section class="main-section">
+                <div class="section-header">Self-Love in S.E.L.F. (Redefined)</div>
+
+                <div class="core-definition">
+                    <blockquote>Self-love is the refusal to abandon yourself as existing.</blockquote>
+                    <p class="clarification">Not affection. Not approval. Not constant kindness.<br>It is non-abandonment.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- CORE SHIFT -->
+            <section class="main-section">
+                <div class="section-header">The Core Shift</div>
+
+                <div class="shift-block">
+                    <div class="shift-from">
+                        <div class="shift-label">Instead of asking</div>
+                        <div class="shift-content">"Do I love myself?"</div>
+                    </div>
+                    <div class="shift-arrow">→</div>
+                    <div class="shift-to">
+                        <div class="shift-label">The deeper question</div>
+                        <div class="shift-content">"Do I leave myself when I am difficult, ashamed, failing, or unlovable?"</div>
+                    </div>
+                </div>
+
+                <p>If the answer is no — self-love is already present.</p>
+                <p>Even if you feel nothing warm. Even if you feel broken. Even if you feel contempt.</p>
+
+                <div class="recognition-block">
+                    Love here is not a feeling.<br>
+                    It is a stance.
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- THREE DEPTHS -->
+            <section class="main-section">
+                <div class="section-header">The Three Depths of Self-Love</div>
+
+                <div class="depth-card depth-1">
+                    <div class="depth-marker">Depth 1</div>
+                    <div class="depth-title">Emotional Self-Love (Surface)</div>
+                    <div class="depth-description">
+                        This is: compassion, reassurance, gentleness, self-soothing.
+                    </div>
+                    <div class="depth-key">
+                        <p class="depth-key-statement">Helpful. Situational. Not always available.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--color-subtle);">S.E.L.F. does not require this.</p>
+                    </div>
+                </div>
+
+                <div class="depth-card depth-2">
+                    <div class="depth-marker">Depth 2</div>
+                    <div class="depth-title">Existential Self-Love (Deeper)</div>
+                    <div class="depth-description">
+                        This is:
+                    </div>
+                    <div class="depth-key">
+                        <p class="depth-key-statement">"Even when I am wrong, hurting, or failing, I remain with myself."</p>
+                        <p style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--color-subtle);">You do not: disown yourself, exile parts of yourself, demand you be different to deserve care.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--color-presence);">This is love as presence, not comfort.</p>
+                    </div>
+                </div>
+
+                <div class="depth-card depth-3">
+                    <div class="depth-marker">Depth 3</div>
+                    <div class="depth-title">Ontological Self-Love (Deepest)</div>
+                    <div class="depth-description">
+                        This is the bottom.
+                    </div>
+                    <div class="depth-key">
+                        <p class="depth-key-statement">Existence does not turn against itself.</p>
+                        <p style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--color-subtle);">You do not need to "love" existence. You stop opposing it.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--color-subtle);">At this level: self-hatred is seen as a reaction, not a verdict. Shame is an experience, not a truth. Despair is something that happens, not who you are.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.95rem; color: var(--color-presence); font-style: italic;">You remain.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- WHAT IT IS NOT -->
+            <section class="main-section">
+                <div class="section-header">What Self-Love Is Not</div>
+                <p><em>This matters.</em></p>
+
+                <div class="not-block">
+                    <h4>Critical Distinctions</h4>
+                    
+                    <div class="not-item">
+                        <span class="label">❌ Not self-indulgence</span>
+                        <p class="explanation">Boundaries still exist.</p>
+                    </div>
+                    
+                    <div class="not-item">
+                        <span class="label">❌ Not self-esteem</span>
+                        <p class="explanation">You don't have to value yourself.</p>
+                    </div>
+                    
+                    <div class="not-item">
+                        <span class="label">❌ Not positivity</span>
+                        <p class="explanation">Pain does not need to be reframed.</p>
+                    </div>
+                    
+                    <div class="not-item">
+                        <span class="label">❌ Not identity protection</span>
+                        <p class="explanation">You can admit fault without self-destruction.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- UNDER PRESSURE -->
+            <section class="main-section">
+                <div class="section-header">Self-Love Under Pressure</div>
+
+                <div class="pressure-block">
+                    <div class="pressure-context">When you fail</div>
+                    <p class="pressure-not">Self-love does not say: "It's okay, you're amazing."</p>
+                    <div class="pressure-response">"I am still here with myself."</div>
+                    <p class="pressure-note">No praise required.</p>
+                </div>
+
+                <div class="pressure-block">
+                    <div class="pressure-context">When you feel unlovable</div>
+                    <p class="pressure-not">Self-love does not argue.</p>
+                    <div class="pressure-response">"Even unlovable feelings do not justify abandonment."</div>
+                    <p class="pressure-note">You don't correct the feeling. You don't obey it.</p>
+                </div>
+
+                <div class="pressure-block">
+                    <div class="pressure-context">When you hurt others</div>
+                    <p class="pressure-not">Self-love does not excuse harm.</p>
+                    <div class="pressure-response">"I take responsibility without self-annihilation."</div>
+                    <p class="pressure-note">That's mature love.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- PRACTICAL MARKER -->
+            <section class="main-section">
+                <div class="section-header">The Practical Marker</div>
+
+                <p>You can tell self-love (at depth) is present when:</p>
+
+                <div class="marker-block">
+                    <h4>Signs of Presence</h4>
+                    <ul class="marker-list">
+                        <li>You don't disappear when ashamed</li>
+                        <li>You don't punish yourself to feel moral</li>
+                        <li>You don't demand perfection to remain present</li>
+                        <li>You don't require self-forgiveness rituals to continue living</li>
+                    </ul>
+                    <p class="marker-note">You stay.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- PARADOX -->
+            <section class="main-section">
+                <div class="paradox-block">
+                    <h3>The Paradox</h3>
+                    <p class="statement">When people stop trying to feel self-love, they stop abandoning themselves.</p>
+                    <p class="because">And that is love.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- FINAL COMPRESSION -->
+            <section class="main-section">
+                <div class="section-header">Final Compression</div>
+
+                <p>If self-love in S.E.L.F. were reduced to one sentence:</p>
+
+                <div class="final-compression">
+                    <p class="final-statement">I do not leave myself, even when I am hard to be with.</p>
+                    <p class="final-note">No sentiment required.<br>No affirmation needed.<br>No warmth demanded.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- AT THE LIMIT -->
+            <section style="text-align: center;">
+                <div class="section-header" style="text-align: center; border-bottom: none;">At The Limit</div>
+
+                <p style="text-align: center; color: var(--color-subtle);">
+                    Sometimes self-love feels gentle.<br>
+                    Sometimes neutral.<br>
+                    Sometimes fierce.<br>
+                    Sometimes silent.<br>
+                    Sometimes it feels like nothing at all.
+                </p>
+
+                <div class="symbol-display">|</div>
+
+                <p class="closing-statement">I am</p>
+
+                <p class="closing-quiet">
+                    And remaining with that — without condition — is love at its deepest form.
+                </p>
+
+                <div class="symbol-display symbol-small" style="margin-top: 2rem;">|</div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-symbol">|</div>
+            <p class="footer-text">S.E.L.F. — Love<br>Document VII of the Self-Evident Existence of Self</p>
+        </footer>
+    </div>
+</body>
+</html>

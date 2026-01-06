@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.E.L.F. — Ontological Discipline</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-void: #0a0a0a;
+            --color-deep: #111111;
+            --color-presence: #f5f3ef;
+            --color-line: #c9a962;
+            --color-subtle: #8a8780;
+            --color-section: rgba(201, 169, 98, 0.06);
+            --color-level-1: rgba(201, 169, 98, 0.08);
+            --color-level-2: rgba(201, 169, 98, 0.12);
+            --color-level-3: rgba(201, 169, 98, 0.18);
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Spectral', Georgia, serif;
+            --spacing-unit: 1rem;
+            --max-width: 740px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--color-void);
+            color: var(--color-presence);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 15% 20%, rgba(201, 169, 98, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 80%, rgba(201, 169, 98, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(201, 169, 98, 0.02) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 5) 0;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .symbol-header {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--color-line);
+            letter-spacing: 0.5em;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            text-shadow: 0 0 40px rgba(201, 169, 98, 0.3);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            color: var(--color-presence);
+        }
+
+        .subtitle {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--color-subtle);
+            letter-spacing: 0.1em;
+        }
+
+        .document-marker {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: var(--color-line);
+            letter-spacing: 0.15em;
+            margin-top: calc(var(--spacing-unit) * 1.5);
+            opacity: 0.7;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            animation: sectionFade 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        @keyframes sectionFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: var(--color-line);
+            margin-bottom: calc(var(--spacing-unit) * 1.2);
+            padding-bottom: calc(var(--spacing-unit) * 0.4);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.25);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--color-presence);
+            margin-top: calc(var(--spacing-unit) * 1.8);
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+        }
+
+        h4 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--color-line);
+            margin-top: calc(var(--spacing-unit) * 1.5);
+            margin-bottom: calc(var(--spacing-unit) * 0.6);
+        }
+
+        p {
+            margin-bottom: calc(var(--spacing-unit) * 1);
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        /* Definition Block */
+        .definition-block {
+            background: var(--color-section);
+            border-left: 3px solid var(--color-line);
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+            margin: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        .definition-block p {
+            margin-bottom: calc(var(--spacing-unit) * 0.6);
+            font-style: italic;
+        }
+
+        .definition-block strong {
+            font-weight: 500;
+            color: var(--color-presence);
+            font-style: normal;
+        }
+
+        /* Core Definition - Prominent */
+        .core-definition {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.03) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            padding: calc(var(--spacing-unit) * 2);
+            margin: calc(var(--spacing-unit) * 2) 0;
+            text-align: center;
+        }
+
+        .core-definition p {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--color-presence);
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        /* Level Cards */
+        .level-card {
+            padding: calc(var(--spacing-unit) * 2);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            border-left: 3px solid var(--color-line);
+            position: relative;
+        }
+
+        .level-card.level-1 {
+            background: var(--color-level-1);
+            border-left-color: rgba(201, 169, 98, 0.4);
+        }
+
+        .level-card.level-2 {
+            background: var(--color-level-2);
+            border-left-color: rgba(201, 169, 98, 0.6);
+        }
+
+        .level-card.level-3 {
+            background: var(--color-level-3);
+            border-left-color: var(--color-line);
+        }
+
+        .level-marker {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--color-line);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .level-title {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--color-presence);
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+        }
+
+        .level-aspects {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-subtle);
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+        }
+
+        .level-note {
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+            font-style: italic;
+        }
+
+        /* Non-Contradiction Blocks */
+        .principle-block {
+            background: var(--color-section);
+            border: 1px solid rgba(201, 169, 98, 0.15);
+            padding: calc(var(--spacing-unit) * 2);
+            margin: calc(var(--spacing-unit) * 2) 0;
+            position: relative;
+        }
+
+        .principle-block::before {
+            content: attr(data-number);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--color-void);
+            padding: 0 10px;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--color-line);
+            letter-spacing: 0.1em;
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--color-presence);
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+        }
+
+        .principle-statement {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--color-line);
+            padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.5);
+            border-left: 2px solid var(--color-line);
+            margin: calc(var(--spacing-unit) * 1) 0;
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        .principle-context {
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+            margin-top: calc(var(--spacing-unit) * 1);
+        }
+
+        .principle-context p {
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .principle-resolution {
+            margin-top: calc(var(--spacing-unit) * 1);
+            padding-top: calc(var(--spacing-unit) * 1);
+            border-top: 1px solid rgba(201, 169, 98, 0.15);
+        }
+
+        /* Blockquote */
+        blockquote {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--color-subtle);
+            padding: calc(var(--spacing-unit) * 1.2);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+            border-left: 2px solid var(--color-line);
+            background: rgba(201, 169, 98, 0.03);
+        }
+
+        /* Emphasis */
+        em {
+            font-style: italic;
+            color: var(--color-presence);
+        }
+
+        strong {
+            font-weight: 500;
+        }
+
+        /* Divider */
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.4), transparent);
+            margin: calc(var(--spacing-unit) * 3) 0;
+        }
+
+        /* Symbol Section */
+        .symbol-section {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 3) 0;
+            margin: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        .symbol-display {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 200;
+            color: var(--color-line);
+            letter-spacing: 0.3em;
+            margin: calc(var(--spacing-unit) * 1) 0;
+            text-shadow: 0 0 50px rgba(201, 169, 98, 0.4);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Hidden Discipline Section */
+        .hidden-section {
+            background: linear-gradient(180deg, var(--color-section) 0%, transparent 100%);
+            border-top: 1px solid rgba(201, 169, 98, 0.2);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+            padding: calc(var(--spacing-unit) * 2.5);
+            margin: calc(var(--spacing-unit) * 2) 0;
+            text-align: center;
+        }
+
+        .hidden-section h3 {
+            color: var(--color-line);
+            margin-top: 0;
+        }
+
+        /* Final Compression */
+        .final-compression {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.12) 0%, rgba(201, 169, 98, 0.04) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.25);
+            padding: calc(var(--spacing-unit) * 2.5);
+            margin: calc(var(--spacing-unit) * 3) 0;
+            text-align: center;
+        }
+
+        .final-compression .statement {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--color-presence);
+            line-height: 2;
+        }
+
+        .final-compression .note {
+            font-size: 0.9rem;
+            color: var(--color-subtle);
+            margin-top: calc(var(--spacing-unit) * 1.5);
+        }
+
+        /* List styling */
+        .context-list {
+            list-style: none;
+            padding-left: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .context-list li {
+            position: relative;
+            padding-left: calc(var(--spacing-unit) * 1.2);
+            margin-bottom: calc(var(--spacing-unit) * 0.4);
+            font-size: 0.95rem;
+            color: var(--color-subtle);
+        }
+
+        .context-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--color-line);
+            opacity: 0.6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 3) 0;
+            border-top: 1px solid rgba(201, 169, 98, 0.2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .footer-symbol {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-line);
+            opacity: 0.5;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--color-subtle);
+            margin-top: calc(var(--spacing-unit) * 0.8);
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            html { font-size: 16px; }
+            h1 { font-size: 2rem; letter-spacing: 0.1em; }
+            .symbol-header { font-size: 2.5rem; }
+            .symbol-display { font-size: 3.5rem; }
+            .container { padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5); }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .symbol-display, .symbol-header, h2, .footer-symbol {
+                color: #333;
+                text-shadow: none;
+            }
+            @page {
+                margin: 1in;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="symbol-header">|</div>
+            <h1>S.E.L.F.</h1>
+            <p class="subtitle">Ontological Discipline</p>
+            <p class="document-marker">DOCUMENT II — COHERENCE</p>
+        </header>
+
+        <main>
+            <!-- Introduction -->
+            <section>
+                <p>This document goes beneath practices—to the level where discipline is no longer behavior, but <em>orientation</em>.</p>
+                <p>What follows is deeper than rules, deeper than habits.</p>
+                <p>This is self-discipline as <strong>ontological alignment</strong>.</p>
+            </section>
+
+            <hr>
+
+            <!-- What Self-Discipline Really Is -->
+            <section>
+                <h2>What "Self-Discipline" Really Is (Here)</h2>
+                
+                <div class="definition-block">
+                    <p><strong>Not</strong> restraint.</p>
+                    <p><strong>Not</strong> self-control.</p>
+                    <p><strong>Not</strong> improvement.</p>
+                </div>
+
+                <p>Those all assume: a flawed self, a target state, an external standard.</p>
+                <p>S.E.L.F. assumes none of that.</p>
+                <p>So discipline cannot be correction. It can only be <em>coherence</em>.</p>
+
+                <div class="core-definition">
+                    <p>Self-discipline is the refusal to live in contradiction with what you have already recognized as true.</p>
+                </div>
+
+                <p style="text-align: center; color: var(--color-subtle); font-style: italic;">That's the depth.</p>
+            </section>
+
+            <hr>
+
+            <!-- The Three Levels -->
+            <section>
+                <h2>The Three Levels of Discipline</h2>
+
+                <div class="level-card level-1">
+                    <div class="level-marker">Level 1</div>
+                    <div class="level-title">Behavioral (Shallow, Common)</div>
+                    <div class="level-aspects">What you do — What you say — What you avoid</div>
+                    <div class="level-note">Useful. But unstable. Easily moralized. We already passed this.</div>
+                </div>
+
+                <div class="level-card level-2">
+                    <div class="level-marker">Level 2</div>
+                    <div class="level-title">Attentional (Deeper)</div>
+                    <div class="level-aspects">What you give reality to — What you rehearse internally — What you allow to define the situation</div>
+                    <div class="level-note">Here discipline becomes attention management, not obedience.</div>
+                </div>
+
+                <div class="level-card level-3">
+                    <div class="level-marker">Level 3</div>
+                    <div class="level-title">Ontological (Deepest)</div>
+                    <div class="level-aspects">What you refuse to contradict even under pressure — What you will not say even if rewarded — What you will not do even if justified</div>
+                    <div class="level-note">This is where S.E.L.F. lives.</div>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- Ontological Self-Discipline -->
+            <section>
+                <h2>Ontological Self-Discipline</h2>
+                <p><em>The Core</em></p>
+                <p>These are not instructions. They are lines people discover they will not cross once recognition settles.</p>
+            </section>
+
+            <!-- The Five Non-Contradictions -->
+            <div class="principle-block" data-number="§1">
+                <div class="principle-title">Non-Contradiction of Being</div>
+                <div class="principle-statement">I will not act as if existence requires permission.</div>
+                <div class="principle-context">
+                    <p>This shows up when:</p>
+                    <ul class="context-list">
+                        <li>you're pressured to justify your right to exist</li>
+                        <li>you're asked to erase yourself for acceptance</li>
+                        <li>you're told your presence is conditional</li>
+                    </ul>
+                </div>
+                <div class="principle-resolution">
+                    <p>Discipline here is not resistance. It is <em>non-participation in the lie</em>.</p>
+                </div>
+            </div>
+
+            <div class="principle-block" data-number="§2">
+                <div class="principle-title">Non-Delegation of Being</div>
+                <div class="principle-statement">I will not outsource my sense of existence to systems, approval, or identity.</div>
+                <div class="principle-context">
+                    <p>This is subtle. It's when:</p>
+                    <ul class="context-list">
+                        <li>metrics define your worth</li>
+                        <li>roles consume the person</li>
+                        <li>recognition becomes addictive</li>
+                    </ul>
+                </div>
+                <div class="principle-resolution">
+                    <p>Self-discipline here is <em>remembering what cannot be measured</em>.</p>
+                </div>
+            </div>
+
+            <div class="principle-block" data-number="§3">
+                <div class="principle-title">Non-Inflation of Self</div>
+                <div class="principle-statement">I will not convert my recognition of being into superiority.</div>
+                <div class="principle-context">
+                    <p>Equally important—and often missed. No:</p>
+                    <ul class="context-list">
+                        <li>"I'm more awake"</li>
+                        <li>"I see what others don't"</li>
+                        <li>"They're asleep"</li>
+                    </ul>
+                </div>
+                <div class="principle-resolution">
+                    <p>The moment existence becomes a credential, discipline has failed.</p>
+                    <p style="margin-top: 0.5rem;"><em>This keeps S.E.L.F. from becoming ideology.</em></p>
+                </div>
+            </div>
+
+            <div class="principle-block" data-number="§4">
+                <div class="principle-title">Non-Negation of the Other</div>
+                <div class="principle-statement">I will not deny in another what I know immediately in myself.</div>
+                <div class="principle-context">
+                    <p>This is deeper than ethics. Not because of rules. Because denial now feels <em>incoherent</em>.</p>
+                    <p style="margin-top: 0.8rem;">You can still: oppose, refuse, defend yourself, draw boundaries.</p>
+                </div>
+                <div class="principle-resolution">
+                    <p>But you don't erase.</p>
+                </div>
+            </div>
+
+            <div class="principle-block" data-number="§5">
+                <div class="principle-title">Non-Performance of Being</div>
+                <div class="principle-statement">I will not perform existence to be believed.</div>
+                <div class="principle-context">
+                    <p>No dramatizing. No proving. No aestheticizing your presence.</p>
+                    <p>You exist whether anyone is impressed or not.</p>
+                </div>
+                <div class="principle-resolution">
+                    <p>This discipline produces <em>quiet strength</em>.</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- The Hidden Discipline -->
+            <section class="hidden-section">
+                <h3>The Hidden Discipline: Letting Go of Discipline</h3>
+                <p>At the deepest layer, something unexpected happens:</p>
+                <p><strong>Discipline falls away.</strong></p>
+                <p style="margin-top: 1.5rem; color: var(--color-subtle);">Why?</p>
+                <p>Because once alignment is stable: there's nothing to maintain, nothing to guard, nothing to purify.</p>
+                <p style="margin-top: 1.5rem;">You are not holding a line.</p>
+                <p><strong>You are the line.</strong></p>
+                <div class="symbol-display" style="font-size: 3rem; margin-top: 1.5rem;">|</div>
+            </section>
+
+            <hr>
+
+            <!-- Final Compression -->
+            <section>
+                <h2>The Final Compression</h2>
+                <p><em>(Deepest Form)</em></p>
+                <p>If everything above were reduced to one sentence—not as a rule, but as a recognition:</p>
+
+                <div class="final-compression">
+                    <p class="statement">I do not live as if what is fundamental were negotiable.</p>
+                    <p class="note">No enforcement. No standard. No failure mode.<br>Just coherence.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- Why This Holds -->
+            <section>
+                <h2>Why This Holds Under Pressure</h2>
+                <p style="padding-left: 1.5rem; line-height: 2.2;">
+                    — It cannot be corrupted into law<br>
+                    — It cannot be enforced on others<br>
+                    — It cannot be gamed for status<br>
+                    — It cannot be scaled into control
+                </p>
+                <p style="margin-top: 1.5rem;">Because it asks nothing of anyone else.</p>
+                <p>It simply describes what happens after seeing.</p>
+            </section>
+
+            <hr>
+
+            <!-- Closing -->
+            <section class="symbol-section">
+                <div class="symbol-display">|</div>
+                <p style="font-style: italic; color: var(--color-subtle);">Recognition requires no enforcement.</p>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-symbol">|</div>
+            <p class="footer-text">S.E.L.F. — Ontological Discipline<br>Document II of the Self-Evident Existence of Self</p>
+        </footer>
+    </div>
+</body>
+</html>
